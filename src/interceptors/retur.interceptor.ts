@@ -6,17 +6,28 @@ import {
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 
-export interface Response<T> {
-  data: T;
-}
+import { UserInterface } from 'src/users/interfaces/user.interface';
 
 @Injectable()
-export class ReturnInterceptor<T> implements NestInterceptor<T, Response<T>> {
-  intercept(
-    context: ExecutionContext,
-    next: CallHandler,
-  ): Observable<Response<T>> {
-    return next.handle().pipe(map((data) => data));
+export class ReturnInterceptor implements NestInterceptor {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    next.handle().subscribe((res) =>
+      res.map((users: UserInterface) => {
+        users.lastName === null
+          ? (users.lastName = 'cambiado por el interceptor')
+          : users.lastName;
+        return users;
+      }),
+    );
+
+    return next.handle().pipe(
+      map((usuario: UserInterface) => {
+        usuario.lastName === null
+          ? (usuario.lastName = 'cambiado 22')
+          : usuario.lastName;
+        return usuario;
+      }),
+    );
   }
 }
 /* ((las) => (las.lastName === null ? 'cambiado' : las.lastName)) */

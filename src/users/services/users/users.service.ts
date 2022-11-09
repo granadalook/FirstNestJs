@@ -12,9 +12,9 @@ export class UsersService {
     },
     { id: '2', name: 'carlos', lastName: null, email: 'carlos@gmail.com' },
     { id: '3', name: 'pedro', lastName: 'guerrero', email: 'pedro@gmail.com' },
-    { id: '4', name: 'camilo', lastName: 'acevedo', email: 'camilo@gmail.com' },
+    { id: '4', name: 'camilo', lastName: null, email: 'camilo@gmail.com' },
     { id: '5', name: 'luis', lastName: 'ruiz', email: 'luis@gmail.com' },
-    { id: '6', name: 'lucas', lastName: 'moncada', email: 'lucas@gmail.com' },
+    { id: '6', name: 'lucas', lastName: null, email: 'lucas@gmail.com' },
   ];
   helloUsers(): string {
     return 'Hola desde el servicio de  Users';
