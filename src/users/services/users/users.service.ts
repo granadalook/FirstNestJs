@@ -1,15 +1,20 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDTO } from 'src/users/dto/users.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateUserDTO, updateUser } from 'src/users/dto/users.dto';
 
 @Injectable()
 export class UsersService {
   usuarios = [
-    { id: '1', name: 'juan', apellido: 'granada', email: 'juan@gmail.com' },
-    { id: '2', name: 'carlos', apellido: 'palacio', email: 'carlos@gmail.com' },
-    { id: '3', name: 'pedro', apellido: 'guerrero', email: 'pedro@gmail.com' },
-    { id: '4', name: 'camilo', apellido: 'acevedo', email: 'camilo@gmail.com' },
-    { id: '5', name: 'luis', apellido: 'ruiz', email: 'luis@gmail.com' },
-    { id: '6', name: 'lucas', apellido: 'moncada', email: 'lucas@gmail.com' },
+    {
+      id: '4ebf7bf3-9913-4cd9-84e8-b618c32c8d38',
+      name: 'juan',
+      lastName: 'granada',
+      email: 'juan@gmail.com',
+    },
+    { id: '2', name: 'carlos', lastName: null, email: 'carlos@gmail.com' },
+    { id: '3', name: 'pedro', lastName: 'guerrero', email: 'pedro@gmail.com' },
+    { id: '4', name: 'camilo', lastName: 'acevedo', email: 'camilo@gmail.com' },
+    { id: '5', name: 'luis', lastName: 'ruiz', email: 'luis@gmail.com' },
+    { id: '6', name: 'lucas', lastName: 'moncada', email: 'lucas@gmail.com' },
   ];
   helloUsers(): string {
     return 'Hola desde el servicio de  Users';
@@ -18,21 +23,25 @@ export class UsersService {
     return this.usuarios;
   }
   getUserById(id: string) {
-    return this.usuarios.find((usuario) => usuario.id === id);
+    const usuario = this.usuarios.find((usuario) => usuario.id === id);
+    if (!usuario) {
+      throw new NotFoundException(`USUARIO DE  ${id} NO EXISTE`);
+    }
+    return usuario;
   }
   createUser(newUsuario: CreateUserDTO) {
     this.usuarios.push(newUsuario);
     return newUsuario;
   }
-  updateUser(id: string, body: CreateUserDTO) {
+  updateUser(id: string, body: updateUser) {
     const user = this.getUserById(id);
-    user.apellido = body.apellido;
+    user.lastName = body.lastName;
     (user.email = body.email), (user.id = body.id), (user.name = body.name);
     return this.createUser(user);
   }
-  updateUserPach(id: string, body: CreateUserDTO) {
+  updateUserPach(id: string, body: updateUser) {
     const user = this.getUserById(id);
-    user.apellido = body.apellido;
+    user.lastName = body.lastName;
     (user.email = body.email), (user.id = body.id), (user.name = body.name);
     return this.createUser(user);
   }

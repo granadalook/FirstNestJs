@@ -1,13 +1,26 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { AppController } from './main/app.controller';
 import { AppService } from './main/app.service';
+import { LoggerMiddleware } from './middleware/inter.middleware';
 import { UsersModule } from './users/users.module';
-import { TasksModule } from './tasks/tasks.module';
-import { ContactsModule } from './contacts/contacts.module';
 
 @Module({
-  imports: [UsersModule, TasksModule, ContactsModule],
+  imports: [UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes(
+        { path: 'users', method: RequestMethod.POST },
+        { path: 'users:id', method: RequestMethod.PUT },
+      );
+  }
+}

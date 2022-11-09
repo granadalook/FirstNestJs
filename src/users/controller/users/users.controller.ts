@@ -7,20 +7,25 @@ import {
   Patch,
   Post,
   Put,
+  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
-import { CreateUserDTO } from 'src/users/dto/users.dto';
+import { tokenGuard } from 'src/guard/calidation.guard';
+import { ReturnInterceptor } from 'src/interceptors/retur.interceptor';
+import { CreateUserDTO, updateUser } from 'src/users/dto/users.dto';
 import { UsersService } from 'src/users/services/users/users.service';
 
 @Controller('users')
+@UseGuards(tokenGuard)
 export class UsersController {
   constructor(private userService: UsersService) {}
-
   @Get('message')
   hello(): string {
     return this.userService.helloUsers();
   }
 
   @Get()
+  @UseInterceptors(ReturnInterceptor)
   getAllUsers() {
     return this.userService.getAllUser();
   }
@@ -33,11 +38,11 @@ export class UsersController {
     return this.userService.createUser(body);
   }
   @Put(':id')
-  updateuser(@Body() body: CreateUserDTO, @Param('id') id: string) {
+  updateuser(@Body() body: updateUser, @Param('id') id: string) {
     return this.userService.updateUser(id, body);
   }
   @Patch(':id')
-  updateUser(@Body() body: CreateUserDTO, @Param('id') id: string) {
+  updateUser(@Body() body: updateUser, @Param('id') id: string) {
     return this.userService.updateUserPach(id, body);
   }
   @Delete(':id')
