@@ -30,4 +30,3 @@ export class ReturnInterceptor implements NestInterceptor {
     );
   }
 }
-/* ((las) => (las.lastName === null ? 'cambiado' : las.lastName)) */

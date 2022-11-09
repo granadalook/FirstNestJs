@@ -7,8 +7,8 @@ export class CreateUserDTO {
   @IsString({ message: 'EL CAMPO name DEBE SER UN STRING ' })
   @IsNotEmpty({ message: 'EL CAMPO name NO DEBE ESTAR  VACIO ' })
   readonly name: string;
-  @IsString({ message: 'EL CAMPO apellido DEBE SER UN STRING ' })
-  @IsNotEmpty({ message: 'EL CAMPO apellido NO DEBE ESTAR  VACIO ' })
+  @IsString({ message: 'EL CAMPO lastName DEBE SER UN STRING ' })
+  @IsNotEmpty({ message: 'EL CAMPO lastName NO DEBE ESTAR  VACIO ' })
   readonly lastName: string;
   @IsEmail()
   @IsNotEmpty({ message: 'EL CAMPO email NO DEBE ESTAR  VACIO ' })

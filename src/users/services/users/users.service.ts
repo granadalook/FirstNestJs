@@ -10,11 +10,36 @@ export class UsersService {
       lastName: 'granada',
       email: 'juan@gmail.com',
     },
-    { id: '2', name: 'carlos', lastName: null, email: 'carlos@gmail.com' },
-    { id: '3', name: 'pedro', lastName: 'guerrero', email: 'pedro@gmail.com' },
-    { id: '4', name: 'camilo', lastName: null, email: 'camilo@gmail.com' },
-    { id: '5', name: 'luis', lastName: 'ruiz', email: 'luis@gmail.com' },
-    { id: '6', name: 'lucas', lastName: null, email: 'lucas@gmail.com' },
+    {
+      id: '4ebf7bf3-9913-4cd9-84e8-b618c32c8d39',
+      name: 'carlos',
+      lastName: null,
+      email: 'carlos@gmail.com',
+    },
+    {
+      id: '4ebf7bf3-9913-4cd9-84e8-b618c32c8d40',
+      name: 'pedro',
+      lastName: 'guerrero',
+      email: 'pedro@gmail.com',
+    },
+    {
+      id: '4ebf7bf3-9913-4cd9-84e8-b618c32c8d41',
+      name: 'camilo',
+      lastName: null,
+      email: 'camilo@gmail.com',
+    },
+    {
+      id: '4ebf7bf3-9913-4cd9-84e8-b618c32c8d42',
+      name: 'luis',
+      lastName: 'ruiz',
+      email: 'luis@gmail.com',
+    },
+    {
+      id: '4ebf7bf3-9913-4cd9-84e8-b618c32c8d43',
+      name: 'lucas',
+      lastName: null,
+      email: 'lucas@gmail.com',
+    },
   ];
   helloUsers(): string {
     return 'Hola desde el servicio de  Users';
